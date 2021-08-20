@@ -1,0 +1,17 @@
+{
+  "name": "lima-test",
+  "packageManager": "yarn@3.0.0",
+  "scripts": {
+    "server": "node api/server.js",
+    "server:dev": "nodemon api/server.js"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "mysql": "^2.18.1",
+    "react": "^17.0.2",
+    "react-dom": "^17.0.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.12"
+  }
+}
