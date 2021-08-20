@@ -23,8 +23,12 @@ function connect() {
     }
   });
 
+  //Reconnect
   connection.on("error", (err) => {
-    if (err === "PROTOCOL_CONNECTION_LOST") {
+    if (
+      err === "PROTOCOL_CONNECTION_LOST" ||
+      err === "PROTOCOL_ENQUEUE_AFTER_FATAL_ERROR"
+    ) {
       connect();
     }
   });

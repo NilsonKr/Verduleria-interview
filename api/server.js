@@ -1,11 +1,14 @@
 const express = require("express");
+const cors = require("cors");
 const config = require("./config/index.js");
+
 require("./db");
 
 const productsRoutes = require("./services/products");
 
 const app = express();
 app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
   res.send("Hello World");

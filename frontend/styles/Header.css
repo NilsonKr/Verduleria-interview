@@ -1,0 +1,45 @@
+header {
+  position: sticky;
+  top: 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 20px;
+  box-shadow: 0 4px 9px rgba(0, 0, 0, 0.09);
+  background-color: white;
+  z-index: 1;
+}
+
+img {
+  vertical-align: middle;
+}
+
+.navbar {
+  display: flex;
+  align-items: center;
+}
+
+.navbar img {
+  margin-right: 20px;
+}
+
+.navbar .product--link {
+  transition: color 0.3s;
+  cursor: pointer;
+}
+
+.navbar .product--link:hover {
+  color: rgb(78, 255, 196);
+}
+
+header span {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-right: 10px;
+}
+
+header a {
+  text-decoration: none;
+  color: black;
+}

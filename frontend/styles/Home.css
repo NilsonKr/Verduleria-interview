@@ -1,0 +1,74 @@
+.home__container {
+  width: 100%;
+  margin: 50px auto 0;
+}
+
+.home__head {
+  text-align: center;
+  font-size: 1.7rem;
+}
+
+.home__icons {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.home__list {
+  margin-top: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, 300px);
+  place-content: center;
+  gap: 20px;
+}
+
+.item__container {
+  width: 100%;
+  height: 400px;
+}
+
+.item--card {
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.09);
+  text-align: center;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.item--card img {
+  height: 260px;
+}
+
+.item--card button {
+  width: 100%;
+  padding: 20px 0;
+  text-align: center;
+  background-color: rgb(70, 255, 193);
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: white;
+  cursor: pointer;
+}
+
+.item--card button:disabled {
+  background-color: rgb(156, 156, 156);
+}
+
+.item--details {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1.2rem;
+}
+
+.item--details span {
+  font-weight: bold;
+}
+
+@media screen and (min-width: 1024px) {
+  .home__container {
+    width: 65%;
+  }
+  .home__list {
+    gap: 40px;
+  }
+}
