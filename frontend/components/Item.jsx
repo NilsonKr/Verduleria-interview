@@ -6,6 +6,7 @@ const Item = ({ product, handleAdd }) => {
       <div className="item--card">
         <h2>{product.name}</h2>
         <img src={product.image} alt="SomeFruit" />
+        <p>{product.description}</p>
         <button
           onClick={() => handleAdd(product)}
           disabled={product.stock <= 0 ? true : false}
