@@ -11,16 +11,18 @@ const Checkout = (props) => {
   const handleBuy = async () => {
     try {
       const purchases = cartItems.map((item) => {
-        console.log(item);
-        return window.fetch(`http://localhost:3000/products/${item.id}`, {
-          method: "PUT",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            stock: item.stock,
-          }),
-        });
+        return window.fetch(
+          `https://verduleria-api-nilsonkr.vercel.app/products/${item.id}`,
+          {
+            method: "PUT",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              stock: item.stock,
+            }),
+          }
+        );
       });
 
       await Promise.all(purchases);

@@ -8,7 +8,7 @@ const products = (props) => {
 
   useEffect(() => {
     window
-      .fetch("http://localhost:3000/products")
+      .fetch("https://verduleria-api-nilsonkr.vercel.app/products")
       .then((res) => res.json())
       .then((data) => setItems(data))
       .catch((err) => console.log(err));
