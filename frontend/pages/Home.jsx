@@ -1,6 +1,7 @@
-import React, { useState, useEffect, useContext } from "react";
-// import useItems from "../hooks/useItems";
-import { Context } from "../context/products";
+import React, { useState, useContext } from "react";
+import { Context } from "../context/cart";
+import { productsContext } from "../context/products";
+import useSortProducts from "../hooks/useSortProducts";
 
 import Item from "../components/Item";
 
@@ -10,26 +11,22 @@ import Cherry from "../assets/cherry.svg";
 import "../styles/Home.css";
 
 const Home = () => {
-  const [items, setItems] = useState([]);
-  const { cartItems, addItemToCart } = useContext(Context);
+  const [category, setCategory] = useState("all");
+  const [sortProducts, orderProducts] = useSortProducts();
+  const { addToCart } = useContext(productsContext);
+  const { addItemToCart } = useContext(Context);
 
-  const addToCart = (item) => {
-    const newItems = [...items];
-
-    const newitem = newItems.find((pro) => pro.id === item.id);
-    newitem.stock -= 1;
-
-    setItems(newItems);
-    addItemToCart(newitem);
+  const handleAddToCart = (item) => {
+    addToCart(item);
+    addItemToCart(item);
   };
 
-  useEffect(() => {
-    window
-      .fetch("http://localhost:3000/products")
-      .then((res) => res.json())
-      .then((data) => setItems(data))
-      .catch((err) => console.log(err));
-  }, []);
+  const selectCategory = (evt) => {
+    const newCategory = evt.target.value;
+
+    orderProducts(newCategory);
+    setCategory(newCategory);
+  };
 
   return (
     <main className="home__container">
@@ -40,9 +37,25 @@ const Home = () => {
         </div>
         <h2>Fruits La Tiendita</h2>
       </section>
+      <select
+        className="home__category"
+        value={category}
+        onChange={selectCategory}
+      >
+        <option value="all">Todo</option>
+        <option value="dulces">Dulces</option>
+        <option value="semiacidas">SemiAcidas</option>
+        <option value="acidas">Acidas</option>
+        <option value="neutras">Neutras</option>
+        <option value="verduras">Verduras</option>
+      </select>
       <section className="home__list">
-        {items.map((product) => (
-          <Item product={product} key={product.id} handleAdd={addToCart} />
+        {sortProducts.map((product) => (
+          <Item
+            product={product}
+            key={product.id}
+            handleAdd={handleAddToCart}
+          />
         ))}
       </section>
     </main>

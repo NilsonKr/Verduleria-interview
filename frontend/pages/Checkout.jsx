@@ -1,5 +1,5 @@
 import React, { useContext } from "react";
-import { Context } from "../context/products";
+import { Context } from "../context/cart";
 import useProductInfo from "../hooks/useProductInfo";
 
 import "../styles/Checkout.css";
@@ -38,7 +38,7 @@ const Checkout = (props) => {
     <section className="checkout__container">
       <article className="products">
         {cartItems.map((item) => (
-          <div className="checkout--item">
+          <div className="checkout--item" key={item.id}>
             <h3>{item.name}</h3>
             <em>Cantidad: {item.quantity}</em>
             <span>Precio: ${item.totalPrice}</span>

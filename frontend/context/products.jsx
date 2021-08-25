@@ -1,55 +1,32 @@
-import React, { useReducer } from "react";
+import React, { useState, useEffect } from "react";
 
-export const Context = React.createContext({ cartItems: [] });
-
-function shopingCart(state, action) {
-  switch (action.type) {
-    case "addItem":
-      return [...state, action.payload];
-    case "updateItem":
-      return action.payload;
-    case "removeItem":
-      return [...state];
-    case "reset":
-      return [];
-  }
-}
+export const productsContext = React.createContext({ products: [] });
 
 const products = (props) => {
-  const [cartItems, setCartItems] = useReducer(shopingCart, []);
+  const [items, setItems] = useState([]);
+  const [sortedProducts] = useState([]);
 
-  //Add or Update Item Method
-  const addItemToCart = (item) => {
-    const indexOfItem = cartItems.findIndex(
-      (cartItem) => item.id === cartItem.id
-    );
-    const newItem = { ...cartItems[indexOfItem] };
+  useEffect(() => {
+    window
+      .fetch("http://localhost:3000/products")
+      .then((res) => res.json())
+      .then((data) => setItems(data))
+      .catch((err) => console.log(err));
+  }, []);
 
-    if (indexOfItem >= 0) {
-      const newItems = [...cartItems];
+  const addToCart = (item) => {
+    const newItems = [...items];
 
-      //Increase quantity And replace in items array
-      newItem.quantity = newItem.quantity + 1;
-      newItem.totalPrice = newItem.quantity * newItem.precio;
-      newItem.stock = item.stock;
-      newItems[indexOfItem] = newItem;
+    const newitem = newItems.find((prod) => prod.id === item.id);
+    newitem.stock -= 1;
 
-      setCartItems({ type: "updateItem", payload: newItems });
-    } else {
-      const newItem = { ...item, quantity: 1, totalPrice: item.precio };
-
-      setCartItems({ type: "addItem", payload: newItem });
-    }
-  };
-
-  const resetCart = () => {
-    setCartItems({ type: "reset" });
+    setItems(newItems);
   };
 
   return (
-    <Context.Provider value={{ cartItems, addItemToCart, resetCart }}>
+    <productsContext.Provider value={{ products: items, addToCart }}>
       {props.children}
-    </Context.Provider>
+    </productsContext.Provider>
   );
 };
 
