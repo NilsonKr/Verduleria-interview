@@ -1,4 +1,4 @@
-const db = require("../db");
+const db = require("../../db");
 
 function list(filter) {
   let query = "SELECT * FROM products ";

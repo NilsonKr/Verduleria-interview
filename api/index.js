@@ -5,6 +5,7 @@ const config = require("./config/index.js");
 require("./db");
 
 const productsRoutes = require("./services/products");
+const trasanctionsRoutes = require("./services/transactions/index");
 
 const app = express();
 app.use(express.json());
@@ -15,6 +16,7 @@ app.get("/", (req, res) => {
 });
 
 app.use("/products", productsRoutes);
+app.use("/transactions", trasanctionsRoutes);
 
 app.listen(config.port, "0.0.0.0", () => {
   console.log(`API run at http://localhost:${config.port}`);

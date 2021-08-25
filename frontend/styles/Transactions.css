@@ -1,0 +1,19 @@
+.transactions__container {
+  width: 100%;
+  margin-top: 40px;
+}
+
+.transaction--item {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  border-bottom: 1px solid gray;
+  margin: 10px 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .transactions__container {
+    width: 60%;
+    margin: 40px auto 0;
+  }
+}

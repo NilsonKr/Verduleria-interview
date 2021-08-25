@@ -1,6 +1,8 @@
 import React, { useContext } from "react";
+import { Link } from "react-router-dom";
 import { Context } from "../context/cart";
 import useProductInfo from "../hooks/useProductInfo";
+import postTransaction from "../utils/postTransaction";
 
 import "../styles/Checkout.css";
 
@@ -25,7 +27,12 @@ const Checkout = (props) => {
         );
       });
 
+      const transactions = cartItems.map((prod) => {
+        return postTransaction({ productId: prod.id, clientId: 1 });
+      });
+
       await Promise.all(purchases);
+      await Promise.all(transactions);
 
       resetCart();
       props.history.push("/");
@@ -53,6 +60,7 @@ const Checkout = (props) => {
         </h2>
         <button onClick={handleBuy}>Comprar</button>
       </div>
+      <Link to="/history">Ver historial de transacciones</Link>
     </section>
   );
 };
